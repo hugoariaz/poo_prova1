@@ -53,11 +53,52 @@ public class Disciplina {
         return nota;
     }
 
-    public void setNota(Float nota) {
+    public void setNota(Float nota){
         this.nota = nota;
     }
+    public void updateDisciplinas(String nomeAntigo, String nome, String ementa, int ciclo, double nota){
+        Connection con = null; PreparedStatement stmt = null; ResultSet rs = null;
+        Exception methodException = null;
+        try{
+            con = DBListener.getConnection();
+            stmt = con.prepareStatement("UPDATE disciplinas SET  nome = ? , ementa = ?, ciclo = ?, nota = ? WHERE nome = ? ");
+            stmt.setString(1, nome);
+            stmt.setString(2, ementa);
+            stmt.setInt(3, ciclo);
+            stmt.setDouble(4, nota);
+            stmt.setString(5, nomeAntigo);
+            rs = stmt.executeQuery();
+        
+        }catch(Exception ex){
+            methodException = ex;
+        }finally{
+            try{rs.close();}catch(Exception ex2){}
+            try{stmt.close();}catch(Exception ex2){}
+            try{con.close();}catch(Exception ex2){}
+        }
+        
+    }
+    public void deleteDisicplina(String nome){
+        
+        Connection con = null; PreparedStatement stmt = null; ResultSet rs = null;
+        Exception methodException = null;
+        try{
+            con = DBListener.getConnection();
+            stmt = con.prepareStatement("DELETE FROM disciplinas WHERE nome = ?");
+            stmt.setString(1, nome);
+            stmt.execute();
+        
+        }catch(Exception ex){
+            methodException = ex;
+        }finally{
+            try{rs.close();}catch(Exception ex2){}
+            try{stmt.close();}catch(Exception ex2){}
+            try{con.close();}catch(Exception ex2){}
+        }
+        if(methodException!=null) throw methodException;
+    }
     
-    public static void addDisciplina(String nome, String ementa, int ciclo, double nota){
+    public static void addDisciplina(String nome, String ementa, int ciclo, double nota)  throws Exception{
       
         Connection con = null; PreparedStatement stmt = null; ResultSet rs = null;
         Exception methodException = null;
@@ -78,10 +119,10 @@ public class Disciplina {
             try{con.close();}catch(Exception ex2){}
         }
         if(methodException!=null) throw methodException;
-        return user;
+       
     }
     
-    public ArrayList getList(){
+    public ArrayList getList() throws Exception {
         ArrayList< Disciplina> disciplinas = new ArrayList<> ();
         
         
