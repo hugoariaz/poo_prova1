@@ -4,7 +4,7 @@
 <%@include file="WEB-INF/menu.jspf"%>
 <%@page import ="java.util.ArrayList"%>>
 
-<% ArrayList<Disciplina> disciplinas = (ArrayList) application.getAttribute ("Disciplinas"); %>
+<% ArrayList<Disciplina> disciplinas = Disciplina.getList(); %>
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -19,38 +19,40 @@
     <body>
         <div align = "center">
         <h1>Disciplinas Cursadas Atualmente</h1>
+        <form>
+            
+            <input type="text" name="nome" />
+            <input type="text" name="ementa" />
+            <input type="text" name="ciclo" />
+            <input type="text" name="nota" />
+            <input type="submit" name="add" value="adicionar" />
+        </form>
         <div class="container">
             
-            <table class="table table-dark table-striped">
-                <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th>Ementa</th>
-                        <th>Ciclo</th>
-                        <th>Nota</th>
-                    </tr>  
-        </thead>
-        <tbody>
+            
+       
             <% 
                 if(disciplinas != null){
                 for (Disciplina disciplina : disciplinas ){%>
+              <form>
+
             
             
-            <tr><td><%=disciplina.getNome()%></td>
-                <td><%=disciplina.getEmenta()%></td>
-                <td><%=disciplina.getCiclo()%></td>
-                <td>
-                    <form>
-                        <input type="test" name="nota" value="<%=disciplina.getNota()%>">
-                        <input type="hidden" name="indice" value="" />
+                        <input type="text" name="nota" value="<%=disciplina.getNome()%>" />
+                        <input type="text" name="nota" value="<%=disciplina.getEmenta()%>" />
+                        <input type="text" name="nota" value="<%=disciplina.getCiclo()%>" />
                         
-                        <td><>input type="submit" name="enviar" value="modificar" /></td>
+                        <input type="text" name="nota" value="<%=disciplina.getNota()%>" />
+                        <input type="hidden" name="nomeAntigo" value="<%=disciplina.getNome()%>" />
+                        
+                        <input type="submit" name="delete" value="excluir" />
+                        <input type="submit" name="update" value="modificar" />
+
                     </form><!-- comment -->
-                </td><!-- comment -->
+                <!-- comment -->
                 <%} }%>
-            </<tr>
-        </tbody>
-        </table>
+           
+      
         </div>  
     </body>
 </html>

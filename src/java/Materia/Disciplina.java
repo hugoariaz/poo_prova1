@@ -59,7 +59,7 @@ public class Disciplina {
     }
     
     
-    public void deletedDisciplina(String nome){
+    public  static void deletedDisciplina(String nome) throws Exception{
     ArrayList<Disciplina> list = new  ArrayList();
         Connection con = null; 
         PreparedStatement stmt = null; 
@@ -83,7 +83,7 @@ public class Disciplina {
     
     }
     
-    public void update(String nomeAntigo, String nome, String ementa, int ciclo, double nota) throws Exception {
+    public static void update(String nomeAntigo, String nome, String ementa, int ciclo, double nota) throws Exception {
         ArrayList<Disciplina> list = new  ArrayList();
         Connection con = null; 
         PreparedStatement stmt = null; 
@@ -138,7 +138,7 @@ public class Disciplina {
    
     }
     
-    public ArrayList getList(ArrayList<Disciplina> dis) throws Exception{
+    public static ArrayList getList() throws Exception{
        ArrayList<Disciplina> list = new  ArrayList();
         Connection con = null; 
         PreparedStatement stmt = null; 
