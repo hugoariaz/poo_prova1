@@ -57,6 +57,30 @@ public class Disciplina {
         this.nota = nota;
     }
     
+    public static void addDisciplina(String nome, String ementa, int ciclo, double nota){
+      
+        Connection con = null; PreparedStatement stmt = null; ResultSet rs = null;
+        Exception methodException = null;
+        try{
+            con = DBListener.getConnection();
+            stmt = con.prepareStatement("INSERT INTO disciplinas values (?, ?, ?, ?)");
+            stmt.setString(1, nome);
+            stmt.setString(2, ementa);
+            stmt.setInt(3, ciclo);
+            stmt.setDouble(4, nota);
+            rs = stmt.executeQuery();
+        
+        }catch(Exception ex){
+            methodException = ex;
+        }finally{
+            try{rs.close();}catch(Exception ex2){}
+            try{stmt.close();}catch(Exception ex2){}
+            try{con.close();}catch(Exception ex2){}
+        }
+        if(methodException!=null) throw methodException;
+        return user;
+    }
+    
     public ArrayList getList(){
         ArrayList< Disciplina> disciplinas = new ArrayList<> ();
         

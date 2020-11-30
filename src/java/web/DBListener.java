@@ -14,6 +14,7 @@ package web;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import java.sql.*;
+import Materia.Disciplina;
 
 
 public class DBListener implements ServletContextListener {
@@ -39,27 +40,9 @@ public class DBListener implements ServletContextListener {
             etapa = "Preparando o statement";
             stmt = con.createStatement();
             etapa = "Criar a tabela de usuários";
-            stmt.execute(Usuario.getCreateStatement());
-            if(Usuario.getList().isEmpty()){
-                etapa = "Criar primeiros usuários";
-                stmt.execute("INSERT INTO usuarios VALUES ("
-                        + "'admin',"
-                        + "'Administrador do Sistema',"
-                        + "'ADMINISTRADOR',"
-                        + "1234".hashCode()
-                        + ")");
-                stmt.execute("INSERT INTO usuarios VALUES ("
-                        + "'ricardo',"
-                        + "'Ricardo Pupo Larguesa',"
-                        + "'USUÁRIO',"
-                        + "1234".hashCode()
-                        + ")");
-            }
-            etapa = "Criar a tabela de categorias";
-            stmt.execute(Categoria.getCreateStatement());
-            etapa = "Criar a tabela de transacoes";
-            stmt.execute(Transacao.getCreateStatement());
-            etapa = "Desconectar do banco de dados";
+            stmt.execute(Disciplina.getCreateStatement());
+            
+            
         }catch(Exception ex){
             exceptionMessage = etapa+": "+ex.getLocalizedMessage();
         }finally{
