@@ -68,4 +68,14 @@ public class Disciplina {
         return list;
     }
     
+    
+      public static String getCreateStatement(){
+        return "CREATE TABLE IF NOT EXISTS disciplinas("
+                + "nome VARCHAR(50) UNIQUE NOT NULL,"
+                + "ementa VARCHAR(200) NOT NULL,"
+                + "ciclo int"
+                + "nota double"
+                + ")";
+    }
+    
 }
