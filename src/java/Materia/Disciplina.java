@@ -5,8 +5,9 @@
  */
 package Materia;
 
+import java.sql.*;
 import java.util.ArrayList;
-
+import web.DBListener;
 /**
  *
  * @author ariaz
@@ -14,13 +15,14 @@ import java.util.ArrayList;
 public class Disciplina {
     private String nome;
     private String ementa;
-    private String ciclo;
-    private Float nota;
+    private int ciclo;
+    private double nota;
 
-    public Disciplina(String nome, String ementa, String ciclo) {
+    public Disciplina(String nome, String ementa, int ciclo, double nota) {
         this.nome = nome;
         this.ementa = ementa;
         this.ciclo = ciclo;
+        this.nota = nota;
     }
 
     public Disciplina() {
@@ -42,15 +44,13 @@ public class Disciplina {
         this.ementa = ementa;
     }
 
-    public String getCiclo() {
+    public int getCiclo() {
         return ciclo;
     }
 
-    public void setCiclo(String ciclo) {
-        this.ciclo = ciclo;
-    }
+  
 
-    public Float getNota() {
+    public double getNota() {
         return nota;
     }
 
@@ -58,12 +58,114 @@ public class Disciplina {
         this.nota = nota;
     }
     
-    public ArrayList getList(ArrayList<Disciplina> dis){
-        ArrayList<String> list = new ArrayList<> ();
-        
-        for (Disciplina disciplina: dis) {
-            list.add(disciplina.getNome());
+    
+    public void deletedDisciplina(String nome){
+    ArrayList<Disciplina> list = new  ArrayList();
+        Connection con = null; 
+        PreparedStatement stmt = null; 
+        ResultSet rs = null;
+        Exception methodException = null;
+        try{
+            con = DBListener.getConnection();
+            stmt = con.prepareStatement("DELETE FROM disciplinas WHERE nome = ?");
+            stmt.setString(1, nome);
+            rs = stmt.executeQuery();
+            
+            
+        }catch(Exception ex){
+            methodException = ex;
+        }finally{
+            try{rs.close();}catch(Exception ex2){}
+            try{stmt.close();}catch(Exception ex2){}
+            try{con.close();}catch(Exception ex2){}
         }
+        if(methodException!=null) throw methodException;
+    
+    }
+    
+    public void update(String nomeAntigo, String nome, String ementa, int ciclo, double nota) throws Exception {
+        ArrayList<Disciplina> list = new  ArrayList();
+        Connection con = null; 
+        PreparedStatement stmt = null; 
+        ResultSet rs = null;
+        Exception methodException = null;
+        try{
+            con = DBListener.getConnection();
+            stmt = con.prepareStatement("UPDATE disciplinas SET nome = ?, ementa = ?, ciclo = ?, nota = ? WHERE nome = ?");
+            stmt.setString(1, nome);
+            stmt.setString(2, ementa);
+            stmt.setInt(3, ciclo);
+            stmt.setDouble(4, nota);
+            stmt.setString(5, nomeAntigo);
+            rs = stmt.executeQuery();
+            
+            
+        }catch(Exception ex){
+            methodException = ex;
+        }finally{
+            try{rs.close();}catch(Exception ex2){}
+            try{stmt.close();}catch(Exception ex2){}
+            try{con.close();}catch(Exception ex2){}
+        }
+        if(methodException!=null) throw methodException;
+    }
+    
+    public static void addDisciplina(String nome, String ementa, int ciclo, double nota) throws Exception { 
+        
+       ArrayList<Disciplina> list = new  ArrayList();
+        Connection con = null; 
+        PreparedStatement stmt = null; 
+        ResultSet rs = null;
+        Exception methodException = null;
+        try{
+            con = DBListener.getConnection();
+            stmt = con.prepareStatement("INSERT INTO disciplinas nome = ?, ementa = ?, ciclo = ?, nota = ?");
+            stmt.setString(1, nome);
+            stmt.setString(2, ementa);
+            stmt.setInt(3, ciclo);
+            stmt.setDouble(4, nota);
+            rs = stmt.executeQuery();
+            
+            
+        }catch(Exception ex){
+            methodException = ex;
+        }finally{
+            try{rs.close();}catch(Exception ex2){}
+            try{stmt.close();}catch(Exception ex2){}
+            try{con.close();}catch(Exception ex2){}
+        }
+        if(methodException!=null) throw methodException;
+   
+    }
+    
+    public ArrayList getList(ArrayList<Disciplina> dis) throws Exception{
+       ArrayList<Disciplina> list = new  ArrayList();
+        Connection con = null; 
+        PreparedStatement stmt = null; 
+        ResultSet rs = null;
+        Exception methodException = null;
+        try{
+            con = DBListener.getConnection();
+            stmt = con.prepareStatement("SELECT * FROM disciplinas");
+            
+            rs = stmt.executeQuery();
+            while(rs.next()){
+                list.add(new Disciplina(
+                        rs.getString("nome"),
+                        rs.getString("ementa"),
+                        rs.getInt("ciclo"),
+                        rs.getDouble("nota")
+                ));
+            }
+        }catch(Exception ex){
+            methodException = ex;
+        }finally{
+            try{rs.close();}catch(Exception ex2){}
+            try{stmt.close();}catch(Exception ex2){}
+            try{con.close();}catch(Exception ex2){}
+        }
+        if(methodException!=null) throw methodException;
+        
         
         return list;
     }
