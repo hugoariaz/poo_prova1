@@ -3,9 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/ariaz/NetBeansProjects/prova1_POO/web/index.jsp</file>
-            <file>file:/Users/ariaz/NetBeansProjects/prova1_POO/web/disciplinas.jsp</file>
-            <file>file:/Users/ariaz/NetBeansProjects/prova1_POO/src/java/Materia/Disciplina.java</file>
+            <file>file:/Users/ariaz/Documents/GitHub/poo_prova1/src/java/Materia/Disciplina.java</file>
+            <file>file:/Users/ariaz/Documents/GitHub/poo_prova1/web/WEB-INF/web.xml</file>
+            <file>file:/Users/ariaz/Documents/GitHub/poo_prova1/web/disciplinas.jsp</file>
+            <file>file:/Users/ariaz/Documents/GitHub/poo_prova1/src/java/web/DBListener.java</file>
+            <file>file:/Users/ariaz/Documents/GitHub/poo_prova1/nbproject/build-impl.xml</file>
         </group>
     </open-files>
 </project-private>

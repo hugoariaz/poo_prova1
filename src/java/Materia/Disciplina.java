@@ -95,7 +95,7 @@ public class Disciplina {
             try{stmt.close();}catch(Exception ex2){}
             try{con.close();}catch(Exception ex2){}
         }
-        if(methodException!=null) throw methodException;
+        
     }
     
     public static void addDisciplina(String nome, String ementa, int ciclo, double nota)  throws Exception{
@@ -122,7 +122,7 @@ public class Disciplina {
        
     }
     
-    public ArrayList getList() throws Exception {
+    public static ArrayList getList() throws Exception {
         ArrayList< Disciplina> disciplinas = new ArrayList<> ();
         
         
