@@ -69,7 +69,7 @@ public class Disciplina {
             con = DBListener.getConnection();
             stmt = con.prepareStatement("DELETE FROM disciplinas WHERE nome = ?");
             stmt.setString(1, nome);
-            rs = stmt.executeQuery();
+            stmt.execute();
             
             
         }catch(Exception ex){
@@ -97,7 +97,7 @@ public class Disciplina {
             stmt.setInt(3, ciclo);
             stmt.setDouble(4, nota);
             stmt.setString(5, nomeAntigo);
-            rs = stmt.executeQuery();
+            stmt.execute();
             
             
         }catch(Exception ex){
@@ -119,12 +119,12 @@ public class Disciplina {
         Exception methodException = null;
         try{
             con = DBListener.getConnection();
-            stmt = con.prepareStatement("INSERT INTO disciplinas nome = ?, ementa = ?, ciclo = ?, nota = ?");
+            stmt = con.prepareStatement("INSERT INTO disciplinas VALUES(?,?,?,?)");
             stmt.setString(1, nome);
             stmt.setString(2, ementa);
             stmt.setInt(3, ciclo);
             stmt.setDouble(4, nota);
-            rs = stmt.executeQuery();
+            stmt.execute();
             
             
         }catch(Exception ex){
@@ -175,7 +175,7 @@ public class Disciplina {
         return "CREATE TABLE IF NOT EXISTS disciplinas("
                 + "nome VARCHAR(50) UNIQUE NOT NULL,"
                 + "ementa VARCHAR(200) NOT NULL,"
-                + "ciclo int"
+                + "ciclo int,"
                 + "nota double"
                 + ")";
     }
